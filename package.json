@@ -19,7 +19,8 @@
   "files": [
     "lib",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "install.ps1"
   ],
   "keywords": [
     "deepseek-harness",
@@ -31,6 +32,14 @@
     "windows-explorer"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liell/dsh-workspace-explorer-picker.git"
+  },
+  "homepage": "https://github.com/liell/dsh-workspace-explorer-picker#readme",
+  "bugs": {
+    "url": "https://github.com/liell/dsh-workspace-explorer-picker/issues"
+  },
   "dsh": {
     "client": {
       "inject": [

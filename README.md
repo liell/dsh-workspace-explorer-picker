@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-0078D6.svg)](#requirements)
 [![Target](https://img.shields.io/badge/target-DeepSeek%20Harness%20Desktop-4F46E5.svg)](#)
+[![npm version](https://img.shields.io/npm/v/dsh-workspace-explorer-picker.svg)](https://www.npmjs.com/package/dsh-workspace-explorer-picker)
 
 > A **DeepSeek Harness Desktop** plugin that opens the native **Windows Explorer folder picker** directly when you add a workspace - no more in-app directory browser.
 

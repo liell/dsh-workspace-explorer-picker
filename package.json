@@ -1,0 +1,43 @@
+﻿{
+  "name": "dsh-workspace-explorer-picker",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness Desktop plugin: opens the native Windows Explorer folder picker directly when adding a workspace, replacing the in-app directory browser.",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "deepseek-harness-desktop",
+    "plugin",
+    "directory-picker",
+    "workspace",
+    "windows-explorer"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ],
+      "platform": "web"
+    }
+  }
+}

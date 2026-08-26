@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
   Installs the dsh-workspace-explorer-picker plugin into DeepSeek
   Harness Desktop's user profile.
@@ -26,9 +26,8 @@ $ErrorActionPreference = 'Stop'
 $Name = 'dsh-workspace-explorer-picker'
 $ProfileName = 'desktop'
 
-$profilesNodeModules = Join-Path $DSHHome 'profiles
-ode_modules'
-$profileDir = Join-Path $DSHHome ("profiles" + $ProfileName)
+$profilesNodeModules = Join-Path $DSHHome 'profiles\node_modules'
+$profileDir = Join-Path $DSHHome ("profiles\" + $ProfileName)
 $target = Join-Path $profilesNodeModules $Name
 
 if (-not (Test-Path $profilesNodeModules)) {

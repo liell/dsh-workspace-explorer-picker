@@ -1,5 +1,22 @@
+# dependencies
 node_modules/
-*.log
-.DS_Store
+
+# environment & secrets (never commit these)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets*
+.npmrc
+
+# packaging
 dist/
 *.tgz
+
+# logs & os
+*.log
+.DS_Store

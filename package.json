@@ -14,10 +14,12 @@
       "types": "./lib/types/client/index.d.ts",
       "default": "./lib/client.js"
     },
+    "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
   },
   "files": [
     "lib",
+    "cordis.patch.yml",
     "README.md",
     "LICENSE",
     "install.ps1"
@@ -41,6 +43,9 @@
     "url": "https://github.com/liell/dsh-workspace-explorer-picker/issues"
   },
   "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "inject": [
         "@deepseek-ai/dsh-client-runtime",

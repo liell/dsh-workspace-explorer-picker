@@ -1,0 +1,8 @@
+# dsh bundle patch: inserts this plugin into a profile's layer stack and
+# disables the stock adaptive directory picker so "Add workspace" opens the
+# native Windows Explorer folder picker directly (DeepSeek Harness Desktop).
+- id: directory-picker
+  disabled: true
+- insert:
+    - id: directory-picker-explorer
+      name: 'dsh-workspace-explorer-picker'

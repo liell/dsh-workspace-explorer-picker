@@ -23,11 +23,14 @@ dialog the shell already uses for its "Choose with Windows" action.
 - **Idempotent installer** (`install.ps1`) for quick setup on any machine.
 - **No volume restrictions**: pick any accessible folder, including exFAT/FAT32
   and network volumes.
+- **Market-ready**: declares `dsh.bundle.patch`, so it can be installed from the
+  DSH Community Market / npm.
 
 ## Table of Contents
 
 - [Requirements](#requirements)
 - [Install](#install)
+- [Market & npm](#market--npm)
 - [How it works](#how-it-works)
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
@@ -66,7 +69,7 @@ The script is idempotent: re-running it is safe.
 
 ### Manual
 
-1. Copy the `lib` folder and `package.json` to
+1. Copy the `lib` folder, `cordis.patch.yml` and `package.json` to
    `$DSH_HOME\profiles\node_modules\dsh-workspace-explorer-picker\`.
 2. Append to `$DSH_HOME\profiles\desktop\cordis.patch.yml`:
 
@@ -85,6 +88,30 @@ The script is idempotent: re-running it is safe.
 After restarting, click **Add workspace** - the Windows Explorer folder dialog
 should open immediately. If nothing happens, check the logs under
 `%APPDATA%\DSH Desktop\logs\` (see [Troubleshooting](#troubleshooting)).
+
+## Market & npm
+
+DeepSeek Harness Desktop's Community Market installs plugins from **npm** when the
+package declares a `dsh.bundle.patch` (this plugin does - see
+`cordis.patch.yml`). The bundle patch disables the stock adaptive picker and
+inserts this plugin, so the manual profile patch above is **not needed** when the
+plugin is installed as a bundle.
+
+1. **Publish to npm** so the market can resolve an install target:
+
+   ```powershell
+   npm login
+   npm publish
+   ```
+
+2. **Get listed in a catalog** (e.g. dshfind): submit your package at
+   `https://dshfind.com` following their submission flow. The catalog verifies
+   the repository backlink (`repository` in `package.json` points to your
+   GitHub repo) before accepting structured install evidence.
+
+3. **Users install** it from the market (Plugins / Market in DSH Desktop
+   settings): the Host runs `pnpm add dsh-workspace-explorer-picker`, applies
+   the bundle patch, and adds it to the profile bundles.
 
 ## How it works
 
@@ -124,10 +151,11 @@ Because everything lives under `$DSH_HOME`, updates to DSH Desktop (which replac
 
 ## Development
 
-The loader only needs `package.json` (with the `dsh.client` declaration) and
-`lib/`. There is no build step: `lib/client.js` is a
-`window.__ModuleLoader__.load` bundle mirroring the structure of the official
-`@deepseek-ai/dsh-client-ui-directory-picker-native` plugin.
+The loader only needs `package.json` (with the `dsh.client` and
+`dsh.bundle.patch` declarations) and `lib/`. There is no build step:
+`lib/client.js` is a `window.__ModuleLoader__.load` bundle mirroring the
+structure of the official `@deepseek-ai/dsh-client-ui-directory-picker-native`
+plugin.
 
 ```
 dsh-workspace-explorer-picker/
@@ -135,8 +163,9 @@ dsh-workspace-explorer-picker/
 |   |-- index.js        # host half (no-op; the plugin is client-only)
 |   |-- client.js       # browser half: renderless directory-flow occupant
 |   `-- types/          # TypeScript declarations
+|-- cordis.patch.yml    # bundle patch (dsh.bundle.patch) - activates the plugin
 |-- install.ps1         # idempotent installer for the profile
-|-- package.json        # dsh.client declaration + exports
+|-- package.json        # dsh.client + dsh.bundle.patch declarations
 |-- README.md
 `-- LICENSE
 ```
@@ -146,9 +175,10 @@ dsh-workspace-explorer-picker/
 ### npm
 
 ```powershell
-npm pack          # produce the .tgz
+npm login
+npm pack          # produce the .tgz (verify the contents)
+npm publish
 git tag v1.0.0
-npm publish       # add your repository URL to package.json first
 ```
 
 ### GitHub
